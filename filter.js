@@ -16,34 +16,48 @@ const filterLongWords = function (words) {
   return words.filter(sizeGreaterThan5);
 };
 
-const olderThan30Years = function (person) {
-  return person.age > 30;
+const isPropertyGreaterThan = function (threshold, property) {
+  return function (object) {
+    return object[property] > threshold;
+  };
 };
 
 // people older than 30 [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
 const filterAdults = function (people) {
-  return people.filter(olderThan30Years);
+  return people.filter(isPropertyGreaterThan(30, 'age'));
 };
 
-const isActive = function (user) {
-  return user.active;
+const isPropertyTrue = function (property) {
+  return function (object) {
+    return object[property];
+  };
 };
 
 // active users [{username: "alice", active: true}, {username: "bob", active: false}] => [{username: "alice", active: true}]
 const filterActiveUsers = function (users) {
-  return users.filter(isActive);
+  return users.filter(isPropertyTrue('active'));
 };
 
-// ***************************** unfinised functions ***************************
+const isGreaterThan = function (number) {
+  return number > 10;
+};
 
 // numbers greater than 10 [5, 12, 7, 18, 3] => [12, 18]
-const filterNumbersGreaterThanTen = function (numbers) { };
+const filterNumbersGreaterThanTen = function (numbers) {
+  return numbers.filter(isGreaterThan);
+};
 
 // books with more than 200 pages [{title: "Book 1", pages: 150}, {title: "Book 2", pages: 250}] => [{title: "Book 2", pages: 250}]
-const filterLongBooks = function (books) { };
+const filterLongBooks = function (books) {
+  return books.filter(isPropertyGreaterThan(200, 'pages'));
+};
 
 // users with incomplete profiles [{username: "alice", profileComplete: true}, {username: "bob", profileComplete: false}] => [{username: "bob", profileComplete: false}]
-const filterIncompleteProfiles = function (users) { };
+const filterIncompleteProfiles = function (users) {
+  return users.filter(isPropertyTrue('profileComplete'));
+};
+
+// console.log(filterIncompleteProfiles([{ username: "alice", profileComplete: true }, { username: "bob", profileComplete: false }]));
 
 // students with grades above 80 [{name: "John", grade: 75}, {name: "Jane", grade: 85}] => [{name: "Jane", grade: 85}]
 const filterHighGrades = function (students) { };
