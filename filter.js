@@ -210,13 +210,25 @@ const filterActiveUsersByPostCount = function (users) {
 };
 
 // filter people older than a certain age [{name: "Alice", age: 25}, {name: "Bob", age: 30}, {name: "Charlie", age: 22}] => [{name: "Bob", age: 30}]
-const filterByAge = function (people, age) { };
+const filterByAge = function (people, threshold) {
+  return people.filter(function (person) {
+    return person.age > threshold;
+  });
+};
 
 // filter products that are cheaper than a given price [{name: "item1", price: 20}, {name: "item2", price: 50}, {name: "item3", price: 10}] => [{name: "item1", price: 20}, {name: "item3", price: 10}]
-const filterByPrice = function (products, price) { };
+const filterByPrice = function (products, threshold) {
+  return products.filter(function (product) {
+    return product.price < threshold;
+  });
+};
 
 // filter students who scored above a certain grade in Math [{name: "John", grades: {math: 80, science: 90}}, {name: "Jane", grades: {math: 70, science: 85}}] => [{name: "John", grades: {math: 80, science: 90}}]
-const filterByMathGrade = function (students, grade) { };
+const filterByMathGrade = function (students, grade) {
+  return students.filter(function (student) {
+    return student.grades.math > grade;
+  });
+};
 
 // filter events that occur before a certain date [{name: "Event1", date: "2024-12-01"}, {name: "Event2", date: "2024-11-15"}] => [{name: "Event2", date: "2024-11-15"}]
 const filterByDate = function (events, date) { };
@@ -231,10 +243,18 @@ const filterByQuantity = function (orders, quantity) { };
 const filterByYear = function (books, year) { };
 
 // filter students with a grade higher than a given threshold in a specific subject [{name: "Alice", grades: {math: 90, science: 80}}, {name: "Bob", grades: {math: 70, science: 85}}] => [{name: "Alice", grades: {math: 90, science: 80}}]
-const filterBySubjectGrade = function (students, subject, threshold) { };
+const filterBySubjectGrade = function (students, subject, threshold) {
+  return students.filter(function (student) {
+    return student.grades[subject] > threshold;
+  });
+};
 
 // filter photos with a minimum number of likes [{id: 1, likes: 100}, {id: 2, likes: 50}] => [{id: 1, likes: 100}]
-const filterByLikes = function (photos, likes) { };
+const filterByLikes = function (photos, likes) {
+  return photos.filter(function (photo) {
+    return photo.likes < likes;
+  });
+};
 
 // filter users who have made a certain number of posts [{username: "Alice", posts: 10}, {username: "Bob", posts: 5}] => [{username: "Alice", posts: 10}]
 const filterByPostCount = function (users, postCount) { };
@@ -276,28 +296,48 @@ const filterByCategoryAndPrice = function (products, category, maxPrice) { };
 const filterActiveUsersByDate = function (users, status, dateThreshold) { };
 
 // Filter orders where the customer's balance is above a certain threshold and the order total is under a certain amount [{customer: {name: "Alice", balance: 1000}, order: {total: 200}}] => [{customer: {name: "Alice", balance: 1000}, order: {total: 200}}]
-const filterOrdersByBalanceAndTotal = function (orders, balanceThreshold, totalThreshold) { };
+const filterOrdersByBalanceAndTotal = function (orders, balanceThreshold, totalThreshold) {
+  return orders.filter(function (order) {
+    return order.customer.balance >= order.order.total;
+  });
+};
 
 // Filter articles based on author name and publish date [{author: {name: "Alice"}, content: "Article 1", publishDate: "2021-01-01"}] => [{author: {name: "Alice"}, content: "Article 1", publishDate: "2021-01-01"}]
 const filterArticlesByAuthorAndDate = function (articles, authorName, dateThreshold) { };
 
 // Filter courses by instructor name and course rating [{instructor: {name: "John"}, course: {rating: 4.5}}] => [{instructor: {name: "John"}, course: {rating: 4.5}}]
-const filterCoursesByInstructorAndRating = function (courses, instructorName, ratingThreshold) { };
+const filterCoursesByInstructorAndRating = function (courses, instructorName, ratingThreshold) {
+  return courses.filter(function (eachCourse) {
+    return eachCourse.course.rating > ratingThreshold && eachCourse.instructor.name === instructorName;
+  });
+};
 
 // Filter projects by team size and completion status [{team: {members: ["Alice", "Bob"], size: 2}, project: {completed: false}}] => [{team: {members: ["Alice", "Bob"], size: 2}, project: {completed: false}}]
 const filterProjectsByTeamSizeAndStatus = function (projects, teamSizeThreshold, status) { };
 
 // Filter job candidates based on years of experience and their skills [{skills: {languages: ["JavaScript", "Python"]}, experience: {years: 5}}] => [{skills: {languages: ["JavaScript", "Python"]}, experience: {years: 5}}]
-const filterCandidatesByExperienceAndSkills = function (candidates, experienceThreshold, requiredSkills) { };
+const filterCandidatesByExperienceAndSkills = function (candidates, experienceThreshold, requiredSkills) {
+  return canditates.filter(function (candidate) {
+    return candidate.experience > experienceThreshold && candidate.includes(candidate.skills.language);
+  });
+};
 
 // Filter events based on location and date [{location: {city: "New York"}, date: {eventDate: "2022-07-01"}}] => [{location: {city: "New York"}, date: {eventDate: "2022-07-01"}}]
 const filterEventsByLocationAndDate = function (events, city, dateThreshold) { };
 
 // Filter customers based on region and membership status [{region: {country: "USA", state: "California"}, membership: {status: "gold"}}] => [{region: {country: "USA", state: "California"}, membership: {status: "gold"}}]
-const filterCustomersByRegionAndStatus = function (customers, region, status) { };
+const filterCustomersByRegionAndStatus = function (customers, region, status) {
+  return customers.filter(function (customer) {
+    return customer.region === region && status === customer.membership.status;
+  });
+};
 
 // Filter tasks based on assignee's role and priority level [{assignee: {role: "developer"}, task: {priority: "high"}}] => [{assignee: {role: "developer"}, task: {priority: "high"}}]
-const filterTasksByRoleAndPriority = function (tasks, role, priorityLevel) { };
+const filterTasksByRoleAndPriority = function (tasks, role, priorityLevel) {
+  return tasks.filter(function (task) {
+    return task.assignee.role === role && task.task.priority === priorityLevel;
+  });
+};
 
 // Filter teams where at least one member is from a specific department [{team: {name: "Dev Team", members: [{name: "Alice", department: "Engineering"}, {name: "Bob", department: "Marketing"}]}}] => [{team: {name: "Dev Team", members: [{name: "Alice", department: "Engineering"}, {name: "Bob", department: "Marketing"}]}}]
 const filterTeamsByDepartment = function (teams, department) { };
