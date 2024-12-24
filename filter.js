@@ -432,7 +432,9 @@ const filterUsersByHashtagAndLikes = function (users, hashtag, minLikes) { };
 // Filter numbers from the first array that are present in the second array
 // Input: [1, 2, 3, 4, 5], [2, 4, 6]
 // Output: [2, 4]
-const filterByMembership = function (numbers, criteria) { };
+const filterByMembership = function (numbers, criteria) {
+  return numbers.filter(number => criteria.includes(number));
+};
 
 // Filter strings from the first array that appear in the second array
 // Input: ["apple", "banana", "cherry"], ["banana", "cherry", "date"]
